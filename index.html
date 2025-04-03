@@ -36,7 +36,7 @@
 
             <!-- Control buttons -->
             <div class="controls">
-                <div><i class="fa-solid fa-backward"></i></div>
+                <div onclick="restartSong()"><i class="fa-solid fa-backward"></i></div>
                 <div onclick="playPause()"><i class="fa-solid fa-play" id="crtlIcon"></i></div>
                 <div><i class="fa-solid fa-forward"></i></div>
             </div>
@@ -44,7 +44,6 @@
     </div>
 
 <script>
-
 let progress = document.getElementById("progress");
 let song = document.getElementById("song");
 let ctrlIcon = document.getElementById("crtlIcon");
@@ -59,13 +58,11 @@ function playPause(){
         song.pause();
         ctrlIcon.classList.remove("fa-pause");
         ctrlIcon.classList.add("fa-play");
-
     }
     else{
-    song.play();
-    ctrlIcon.classList.add("fa-pause");
-    ctrlIcon.classList.remove("fa-play");
-
+        song.play();
+        ctrlIcon.classList.add("fa-pause");
+        ctrlIcon.classList.remove("fa-play");
     }
 }
 
@@ -77,12 +74,18 @@ if(song.play()){
 
 progress.onchange = function(){
     song.play();
-    song.currentTime = progress.value
+    song.currentTime = progress.value;
     ctrlIcon.classList.add("fa-pause");
     ctrlIcon.classList.remove("fa-play");
 }
 
-
+// Restart the song when the backward button is clicked
+function restartSong() {
+    song.currentTime = 0;  // Reset the song to the beginning
+    song.play();           // Play the song immediately after resetting
+    ctrlIcon.classList.add("fa-pause");  // Show the "pause" icon
+    ctrlIcon.classList.remove("fa-play");
+}
 </script>
 
 </body>
